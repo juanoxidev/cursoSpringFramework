@@ -4,4 +4,6 @@ package com.prueba.spring.IoC;
 public interface Empleado {
 
 	public String getTareas();
+	
+	public String getInforme();
 }
