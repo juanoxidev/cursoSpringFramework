@@ -2,12 +2,17 @@ package com.prueba.spring.IoC;
 
 public class DirectorEmpleado implements Empleado {
 
-	// Creamos el campo tipo CreacionInforme (interfaz)
 	
+	// Creamos el campo tipo CreacionInforme (interfaz)
 	private CreacionInformes informeNuevo;
 	private String email;
 	private String nombreEmpresa;
 	
+	// Creacion de constructor que inyecta la dependencia
+	public DirectorEmpleado(CreacionInformes infNuevo) {
+		this.informeNuevo=infNuevo;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -23,10 +28,7 @@ public class DirectorEmpleado implements Empleado {
 	public void setNombreEmpresa(String nombreEmpresa) {
 		this.nombreEmpresa = nombreEmpresa;
 	}
-	// Creacion de constructor que inyecta la dependencia
-	public DirectorEmpleado(CreacionInformes infNuevo) {
-		this.informeNuevo=infNuevo;
-	}
+
 	@Override
 	public String getTareas() {
 		// TODO Auto-generated method stub
@@ -38,5 +40,18 @@ public class DirectorEmpleado implements Empleado {
 		// TODO Auto-generated method stub
 		return "Informe creado por el Director: " + informeNuevo.getInforme();
 	}
+	
+	// Crear metodo Init. Ejecutar tareas antes de que el bean este disponible
+	public void metodoInicial() {
+		System.out.println("Dentro del metodo init. Aqui irian las tareas ejecutar " + "antes de que el bean este listo");
+		
+	}
+	
+	// Crear metodo destroy. Ejecutar tareas despues de que el bean haya sido utilizado.
+	public void metodoFinal() {
+		System.out.println("Dentro del metodo destroy. Aqui irian las tareas ejecutar " + "despues de utilizar el bean");
+		
+	}
+	// Generarmente el metodo init o destroy no devuelven informacion, por ello en su mayoria son void 
 
 }

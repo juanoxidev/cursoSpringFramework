@@ -12,9 +12,9 @@
 
 
 <bean id="miInforme" class="com.prueba.spring.IoC.Informe"></bean>
-<!--En la etiqueta del bean podemos elegir atraves del atributo scope si queremos que el objeto sea prototype o que se comporte como singleton (default)-->
-<bean id="miEmpleado2" class="com.prueba.spring.IoC.SecretarioEmpleado" scope="prototype">
-<property name="informeNuevo" ref="miInforme"></property>
-
+<!--En la etiqueta del bean podemos-->
+<bean id="miEmpleado" class="com.prueba.spring.IoC.DirectorEmpleado" init-method="metodoInicial" destroy-method="metodoFinal">
+<constructor-arg ref="miInforme"></constructor-arg>
 </bean>
+
 </beans>
