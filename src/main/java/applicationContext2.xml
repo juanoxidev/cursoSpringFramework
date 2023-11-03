@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-3.1.xsd
+">
+
+<!--  Siempre Llamamos a las propiedades primero, estos estan en un archivo externo.propiedades y hacemos referencia a ellos aca para pasarselo a nuestros beans -->
+<context:property-placeholder location="classpath:datosEmpresa.propiedades"/>
+<!--  Creacion de la dependencia  -->
+<bean id="miInforme" class="com.prueba.spring.IoC.Informe"></bean>
+
+<!-- creamos el generador de beans  k
+
+Atributos
+
+id= "como queremos que se llame este objeto" 
+
+class= "indicamos donde se encuentra ruta la clase de la cual queremos generar objetos"
+
+-->
+
+<bean id="miEmpleado" class="com.prueba.spring.IoC.DirectorEmpleado">
+<!--  Inyectamos la depemdemcia x constructor con <contructor-arg>, en el atributo ref ponemos el id de al dependencia/bean -->
+<constructor-arg ref="miInforme"></constructor-arg>
+<!--  Inyectamos propiedades para el campo email y nombreEmpresa con etiquetas y valores, en el atributo name ponemos el setter de la clase sin el set y la primera lera en minuscula, en el value ponemos el valor de ese campo que tendra en comun con todos los directores -->
+<!-- <property name="email" value=""></property>
+<property name="nombreEmpresa" value="Spring S.A."></property> -->
+<!--  Inyectamos propiedades para el campo email y nombreEmpresa con etiquetas y  archivo externo datosEmpresa.propiedades que fue llamados a principio de este archivo en la etiqueta <context:property-placeholder location="classpath:datosEmpresa.propiedades"> -->
+<property name="email" value="${email}"></property>
+<property name="nombreEmpresa" value="${nombreEmpresa}"></property>
+</bean>
+<bean id="miEmpleado2" class="com.prueba.spring.IoC.SecretarioEmpleado">
+<!--  Inyectamos la depemdemcia x el metodo, en el atributo name ponemos el setter de la clase sin el set y la primera lera en minuscula, en el ref el id del bean. -->
+<property name="informeNuevo" ref="miInforme"></property>
+<!--  Inyectamos la depemdemcia para el campo/propiedad email y nombreEmpresa, en el atributo name ponemos el setter de la clase sin el set y la primera lera en minuscula, en el value ponemos el valor de ese campo que tendra en comun con todos los secretarios -->
+<property name="email" value="secretaria@spring.com.ar"></property>
+<property name="nombreEmpresa" value="Spring S.A."></property>
+</bean>
+</beans>

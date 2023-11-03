@@ -9,31 +9,11 @@
     http://www.springframework.org/schema/context/spring-context-3.1.xsd
 ">
 
-<!--  Creacion de la dependencia  -->
+
+
 <bean id="miInforme" class="com.prueba.spring.IoC.Informe"></bean>
-
-<!-- creamos el generador de beans  
-
-Atributos
-
-id= "como queremos que se llame este objeto" 
-
-class= "indicamos donde se encuentra ruta la clase de la cual queremos generar objetos"
-
--->
-
-<bean id="miEmpleado" class="com.prueba.spring.IoC.DirectorEmpleado">
-<!--  Inyectamos la depemdemcia x constructor con <contructor-arg>, en el atributo ref ponemos el id de al dependencia/bean -->
-<constructor-arg ref="miInforme"></constructor-arg>
-<!--  Inyectamos la depemdemcia para el campo email y nombreEmpresa, en el atributo name ponemos el setter de la clase sin el set y la primera lera en minuscula, en el value ponemos el valor de ese campo que tendra en comun con todos los directores -->
-<property name="email" value="directorio@spring.com.ar"></property>
-<property name="nombreEmpresa" value="Spring S.A."></property>
-</bean>
 <bean id="miEmpleado2" class="com.prueba.spring.IoC.SecretarioEmpleado">
-<!--  Inyectamos la depemdemcia x el metodo, en el atributo name ponemos el setter de la clase sin el set y la primera lera en minuscula, en el ref el id del bean. -->
 <property name="informeNuevo" ref="miInforme"></property>
-<!--  Inyectamos la depemdemcia para el campo email y nombreEmpresa, en el atributo name ponemos el setter de la clase sin el set y la primera lera en minuscula, en el value ponemos el valor de ese campo que tendra en comun con todos los secretarios -->
-<property name="email" value="secretaria@spring.com.ar"></property>
-<property name="nombreEmpresa" value="Spring S.A."></property>
+
 </bean>
 </beans>
